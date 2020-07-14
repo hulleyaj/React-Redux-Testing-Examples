@@ -11,7 +11,7 @@ const ReduxCounter = ({ decrementCount, incrementCount, count }) => (
   <div>
     <h2>Redux Counter</h2>
     <button type="button" onClick={decrementCount}>-</button>
-    {count}
+    <span>{count}</span>
     <button type="button" onClick={incrementCount}>+</button>
   </div>
 );

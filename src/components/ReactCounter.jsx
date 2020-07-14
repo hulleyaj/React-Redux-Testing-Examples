@@ -27,7 +27,7 @@ const ReactCounter = () => {
     <div>
       <h2>React Counter</h2>
       <button type="button" onClick={() => dispatch({ type: DECREMENT_COUNT })}>-</button>
-      { count }
+      <span>{count}</span>
       <button type="button" onClick={() => dispatch({ type: INCREMENT_COUNT })}>+</button>
     </div>
   );
