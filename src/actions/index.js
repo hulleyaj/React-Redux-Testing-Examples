@@ -1,12 +1,10 @@
-import {
-  DECREMENT_COUNT,
-  INCREMENT_COUNT,
-} from '../constants/actions';
+export {
+  decrementCountAction,
+  incrementCountAction,
+} from './counter';
 
-export const decrementCountAction = () => ({
-  type: DECREMENT_COUNT,
-});
-
-export const incrementCountAction = () => ({
-  type: INCREMENT_COUNT,
-});
+export {
+  getTodosRequestAction,
+  getTodosOkAction,
+  getTodosErrorAction,
+} from './todos';

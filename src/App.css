@@ -2,3 +2,12 @@
   display: flex;
   flex-direction: column;
 }
+
+.ReduxTodos {
+  display: flex;
+  flex-direction: column;
+}
+
+.ReduxTodos button {
+  width: 100px;
+}
