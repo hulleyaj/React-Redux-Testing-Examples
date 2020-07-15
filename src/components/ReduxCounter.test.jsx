@@ -1,11 +1,11 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import { Provider } from 'react-redux';
 import {
   decrementCountAction,
   incrementCountAction,
 } from '../actions';
-import ReduxCounter from './ReduxCounter';
+import ConnectedComponent, { ReduxCounter } from './ReduxCounter';
 
 const store = {
   dispatch: jest.fn(),
@@ -21,7 +21,7 @@ describe('ReduxCounter overkill testing', () => {
   it('should dispatch decrement count', () => {
     const wrapper = mount(
       <Provider store={store}>
-        <ReduxCounter />
+        <ConnectedComponent />
       </Provider>,
     );
     const buttons = wrapper.find('button');
@@ -36,7 +36,7 @@ describe('ReduxCounter overkill testing', () => {
 
     const wrapper = mount(
       <Provider store={store}>
-        <ReduxCounter />
+        <ConnectedComponent />
       </Provider>,
     );
     const buttons = wrapper.find('button');
@@ -49,9 +49,37 @@ describe('ReduxCounter overkill testing', () => {
   it('should show count from state', () => {
     const wrapper = mount(
       <Provider store={store}>
-        <ReduxCounter />
+        <ConnectedComponent />
       </Provider>,
     );
+
+    expect(wrapper.find('span').text()).toEqual('777');
+  });
+});
+
+describe('ReduxCounter simple testing', () => {
+  it('should decrement count', () => {
+    const mockDecrementCount = jest.fn();
+    const wrapper = shallow(<ReduxCounter decrementCount={mockDecrementCount} />);
+    const buttons = wrapper.find('button');
+
+    expect(mockDecrementCount).toHaveBeenCalledTimes(0);
+    buttons.at(0).simulate('click');
+    expect(mockDecrementCount).toHaveBeenCalledTimes(1);
+  });
+
+  it('should increment count', () => {
+    const mockIncrementCount = jest.fn();
+    const wrapper = shallow(<ReduxCounter incrementCount={mockIncrementCount} />);
+    const buttons = wrapper.find('button');
+
+    expect(mockIncrementCount).toHaveBeenCalledTimes(0);
+    buttons.at(1).simulate('click');
+    expect(mockIncrementCount).toHaveBeenCalledTimes(1);
+  });
+
+  it('should show count from props', () => {
+    const wrapper = shallow(<ReduxCounter count={777} />);
 
     expect(wrapper.find('span').text()).toEqual('777');
   });

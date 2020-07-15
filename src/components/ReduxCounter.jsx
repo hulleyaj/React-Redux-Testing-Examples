@@ -7,7 +7,7 @@ import {
 } from '../actions';
 import { countSelector } from '../reducers/counter';
 
-const ReduxCounter = ({ decrementCount, incrementCount, count }) => (
+export const ReduxCounter = ({ decrementCount, incrementCount, count }) => (
   <div>
     <h2>Redux Counter</h2>
     <button type="button" onClick={decrementCount}>-</button>
