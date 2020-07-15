@@ -8,14 +8,14 @@ const initialState = {
   count: 0,
 };
 
-const reducer = (state, action) => {
+export const reducer = (state, action) => {
   switch (action.type) {
     case DECREMENT_COUNT:
       return { count: state.count - 1 };
     case INCREMENT_COUNT:
       return { count: state.count + 1 };
     default:
-      throw new Error();
+      throw new Error('Bad action');
   }
 };
 

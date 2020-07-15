@@ -1,5 +1,5 @@
+/* eslint-disable import/no-named-as-default */
 import React from 'react';
-import { Provider } from 'react-redux';
 import ReactCounter from './components/ReactCounter';
 import ReduxCounter from './components/ReduxCounter';
 import './App.css';

@@ -24,9 +24,8 @@ describe('ReduxCounter overkill testing', () => {
         <ConnectedComponent />
       </Provider>,
     );
-    const buttons = wrapper.find('button');
 
-    buttons.at(0).simulate('click');
+    wrapper.find('button').at(0).simulate('click');
 
     expect(store.dispatch).toHaveBeenCalledWith(decrementCountAction());
   });
@@ -39,9 +38,8 @@ describe('ReduxCounter overkill testing', () => {
         <ConnectedComponent />
       </Provider>,
     );
-    const buttons = wrapper.find('button');
 
-    buttons.at(1).simulate('click');
+    wrapper.find('button').at(1).simulate('click');
 
     expect(store.dispatch).toHaveBeenCalledWith(incrementCountAction());
   });
@@ -61,20 +59,18 @@ describe('ReduxCounter simple testing', () => {
   it('should decrement count', () => {
     const mockDecrementCount = jest.fn();
     const wrapper = shallow(<ReduxCounter decrementCount={mockDecrementCount} />);
-    const buttons = wrapper.find('button');
 
     expect(mockDecrementCount).toHaveBeenCalledTimes(0);
-    buttons.at(0).simulate('click');
+    wrapper.find('button').at(0).simulate('click');
     expect(mockDecrementCount).toHaveBeenCalledTimes(1);
   });
 
   it('should increment count', () => {
     const mockIncrementCount = jest.fn();
     const wrapper = shallow(<ReduxCounter incrementCount={mockIncrementCount} />);
-    const buttons = wrapper.find('button');
 
     expect(mockIncrementCount).toHaveBeenCalledTimes(0);
-    buttons.at(1).simulate('click');
+    wrapper.find('button').at(1).simulate('click');
     expect(mockIncrementCount).toHaveBeenCalledTimes(1);
   });
 
