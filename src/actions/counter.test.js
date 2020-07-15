@@ -7,7 +7,7 @@ import {
   incrementCountAction,
 } from '.';
 
-describe('actions', () => {
+describe('counter actions', () => {
   it('should decrementCountAction', () => {
     const action = decrementCountAction();
 

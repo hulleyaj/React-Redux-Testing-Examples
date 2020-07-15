@@ -1,11 +1,11 @@
 import {
   getTodosRequestAction,
   getTodosOkAction,
-  getTodosErrorAction
+  getTodosErrorAction,
 } from '../actions';
-import reducer, { countSelector } from './counter';
+import reducer, { todosSelector } from './todos';
 
-describe('reducer', () => {
+describe('todos reducer', () => {
   const initialState = {
     loading: 'lol',
     loaded: 'lol',
@@ -25,38 +25,51 @@ describe('reducer', () => {
   });
 
   it('should GET_TODOS_OK', () => {
-    const result = reducer(initialState, getTodosOkAction());
+    const result = reducer(initialState, getTodosOkAction(['lol', 'lul']));
 
-    expect(result.count).toEqual(51);
+    expect(result).toEqual({
+      loading: false,
+      loaded: true,
+      todos: ['lol', 'lul'],
+      error: null,
+    });
   });
 
   it('should GET_TODOS_ERROR', () => {
-    const result = reducer(initialState, getTodosErrorAction());
+    const result = reducer(initialState, getTodosErrorAction('lol'));
 
-    expect(result.count).toEqual(51);
+    expect(result).toEqual({
+      loading: false,
+      loaded: false,
+      todos: [],
+      error: 'lol',
+    });
   });
 
   it('should return state', () => {
     const result = reducer(initialState, { type: 'lol' });
 
-    expect(result.count).toEqual(50);
+    expect(result).toEqual(initialState);
   });
 
   it('should have initialState', () => {
     const result = reducer(undefined, { type: 'lol' });
 
-    expect(result.count).toEqual(0);
+    expect(result).toEqual({
+      loading: false,
+      loaded: false,
+      todos: [],
+      error: null,
+    });
   });
 });
 
-describe('countSelector', () => {
+describe('todosSelector', () => {
   it('should select count from state', () => {
     const state = {
-      counter: {
-        count: 7,
-      },
+      todos: 'todos here',
     };
 
-    expect(countSelector(state)).toEqual(7);
+    expect(todosSelector(state)).toEqual('todos here');
   });
 });

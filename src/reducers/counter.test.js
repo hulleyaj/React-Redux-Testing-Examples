@@ -4,7 +4,7 @@ import {
 } from '../actions';
 import reducer, { countSelector } from './counter';
 
-describe('reducer', () => {
+describe('counter reducer', () => {
   const initialState = {
     count: 50,
   };

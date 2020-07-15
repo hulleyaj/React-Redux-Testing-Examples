@@ -6,7 +6,7 @@ import { todosSelector } from '../reducers/todos';
 
 const Todo = ({ title }) => <span>{title}</span>;
 
-const ReduxTodos = ({
+export const ReduxTodos = ({
   getTodos, loading, error, todos,
 }) => (
   <div className="ReduxTodos">
@@ -15,7 +15,7 @@ const ReduxTodos = ({
     { loading && <span>...Loading</span> }
     { error && <span>{error}</span>}
     {
-      todos.map(({ title, id }) => <Todo title={title} key={id} />)
+      todos && todos.length > 0 && todos.map(({ title, id }) => <Todo title={title} key={id} />)
     }
   </div>
 );
