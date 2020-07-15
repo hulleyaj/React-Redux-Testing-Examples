@@ -13,16 +13,24 @@ describe('getTodosThunk', () => {
     const dispatch = jest.fn();
 
     mockAPI.onGet('https://jsonplaceholder.typicode.com/todos')
-      .reply(200, { data: ['lol', 'lul'] });
+      .reply(200, ['lol', 'lul']);
 
     await getTodosThunk()(dispatch);
 
-    debugger
-    expect(dispatch).toHaveBeenCalledWith(getTodosRequestAction());
-    expect(dispatch).toHaveBeenCalledWith(getTodosOkAction(['lol', 'lul']));
+    expect(dispatch).toHaveBeenNthCalledWith(1, getTodosRequestAction());
+    expect(dispatch).toHaveBeenNthCalledWith(2, getTodosOkAction(['lol', 'lul']));
   });
 
-  it('should handle error calls', () => {
+  it('should handle error calls', async () => {
+    const mockAPI = new MockAdapter(axios);
+    const dispatch = jest.fn();
 
+    mockAPI.onGet('https://jsonplaceholder.typicode.com/todos')
+      .reply(500);
+
+    await getTodosThunk()(dispatch);
+
+    expect(dispatch).toHaveBeenNthCalledWith(1, getTodosRequestAction());
+    expect(dispatch).toHaveBeenNthCalledWith(2, getTodosErrorAction('Request failed with status code 500'));
   });
 });

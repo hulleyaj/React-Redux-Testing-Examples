@@ -9,14 +9,9 @@ import {
 const getTodosThunk = () => (dispatch) => {
   dispatch(getTodosRequestAction());
 
-  axios.get('https://jsonplaceholder.typicode.com/todos')
-    .then(({ data }) => {
-      dispatch(getTodosOkAction(take(data, 20)));
-      debugger
-    })
-    .catch(({ message }) => {
-      dispatch(getTodosErrorAction(message));
-    });
+  return axios.get('https://jsonplaceholder.typicode.com/todos')
+    .then(({ data }) => dispatch(getTodosOkAction(take(data, 20))))
+    .catch(({ message }) => dispatch(getTodosErrorAction(message)));
 };
 
 export default getTodosThunk;
